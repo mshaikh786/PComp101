@@ -91,8 +91,10 @@ int main(int argc, char *argv[]) {
 		fprintf(stdout, "ROWS = %d  , COLS = %d\n", t_rows, t_cols);
 		fprintf(stdout, "ROWS PER TASK = %d, ROWS FOR LAST TASK = %d\n", rows,
 				rem + ((t_rows - rem) / numranks) + 2);
+#ifdef VIS
 		fprintf(stdout, "WRITE RESULTS ON EVERY %d ITERATION TO FILES\n",
-				chkpnt_iter);
+			chkpnt_iter);
+#endif
 		fprintf(stdout, "MAXIMUM ITERATIONS ALLOWED = %d\n", max_iter);
 		fprintf(stdout, "TOLERANCE= %f\n", tol);
 		fprintf(stdout, "MAX TEMP = %f\n", max_temp);
@@ -184,22 +186,22 @@ void init_grid(int rows, int cols, float **T, float max_temp) {
 	}
 
 	// Set left and rigth boundary initial values
-	for (i = 1; i < rows-1; i++) {
+	for (i = 1; i < rows - 1; i++) {
 		T[i][0] = max_temp;
 		T[i][cols - 1] = max_temp * 0.75;
 	}
 
 	// Set top and bottom boundary initial values
 	if (rank == 0) {
-		T[0][0] 			= max_temp;
-		T[0][cols-1] 		= max_temp;
-		for (j = 1; j < cols-1; j++) {
+		T[0][0] = max_temp;
+		T[0][cols - 1] = max_temp;
+		for (j = 1; j < cols - 1; j++) {
 			T[0][j] = max_temp;
 		}
 	} else if (rank == last_rank) {
-		T[rows-1][0] 		= max_temp;
-		T[rows-1][cols-1]	= max_temp*0.75;
-		for (j = 1; j < cols-1; j++) {
+		T[rows - 1][0] = max_temp;
+		T[rows - 1][cols - 1] = max_temp * 0.75;
+		for (j = 1; j < cols - 1; j++) {
 			T[rows - 1][j] = max_temp * 0.75;
 		}
 	}

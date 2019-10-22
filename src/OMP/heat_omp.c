@@ -69,8 +69,10 @@ int main(int argc, char *argv[]) {
 	fprintf(stdout, "INPUT PARAMETERS\n================\n");
 
 	fprintf(stdout, "ROWS = %d  , COLS = %d\n", rows - 2, cols - 2);
+#ifdef VIS
 	fprintf(stdout, "WRITE RESULTS ON EVERY %d ITERATION TO FILES\n",
 			chkpnt_iter);
+#endif
 	fprintf(stdout, "MAXIMUM ITERATIONS ALLOWED = %d\n", max_iter);
 	fprintf(stdout, "TOLERANCE= %f\n", tol);
 	fprintf(stdout, "MAX TEMP = %f\n", max_temp);
