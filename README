@@ -1,0 +1,33 @@
+This code solves for steady state heat transfer in a  metal plate 
+modelled by 2D Laplace equation.
+
+The serial, OpenMP and MPI verisons of the code are included
+
+
+BUILD:
+Makefiles to build on CrayXC and with OpenMPI on a white cluster are provided in src directories.
+There is a global Makefile which build everything on a CrayXC
+> make all
+To build with visualisation support 
+> make VIS=1 all
+The resulting exeuctables should end up in "bin" directory. 
+
+
+RUN:
+
+srun -n NUM_MPI_TASKS -c NUM_OMP_THREADS heat_VERSION [options]
+
+options:
+	-r 	Number of points in Y dimension
+	-c 	Number of points in X dimension
+	-d	Tolerace value for change in tempearture used as stop condition, default is 1.0e-4 
+	-m	Maximum iterations in case tolerance is not reached, default is 4000
+	-k	Checkpoint results on every kth iteration, default is 1000
+	-t 	Maximum temprature to be set at the boundaries. Default is 100.0
+		The inner domain will have Max_temp*0.75.
+
+The default problem size is set to 2046 x 2046 grid points but can be increased using 
+-r and -c parameters as command line arguments. This will increase the heap allocation by the code.
+Default iterations are set to 1000 but can be modified using -m command line argument.
+
+
