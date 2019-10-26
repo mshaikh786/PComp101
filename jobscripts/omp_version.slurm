@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-#SBATCH --job-name=serial_profile
+#SBATCH --job-name=heat_omp
 ##SBATCH --reservation=training
 #SBATCH --time=00:20:00
 #SBATCH --nodes=1
@@ -8,6 +8,5 @@
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.out
 
-
-module load arm-reports
-srun -n 1 --hint=nomultithread perf-report --nompi $PWD/bin/heat_serial
+export OMP_NUM_THREADS=4
+time -p srun -n 1 -c $OMP_NUM_THREADS --hint=nomultithread $PWD/bin/heat_omp

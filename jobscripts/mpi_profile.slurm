@@ -1,6 +1,6 @@
 #!/bin/bash -l
 
-#SBATCH --job-name=serial_profile
+#SBATCH --job-name=mpi_profile
 ##SBATCH --reservation=training
 #SBATCH --time=00:20:00
 #SBATCH --nodes=1
@@ -10,4 +10,5 @@
 
 
 module load arm-reports
-srun -n 1 --hint=nomultithread perf-report --nompi $PWD/bin/heat_serial
+srun --hint=nomultithread perf-report -n 8 $PWD/bin/heat_mpi
+
