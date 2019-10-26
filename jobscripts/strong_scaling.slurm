@@ -9,4 +9,4 @@
 
 
 module load arm-reports
-perf-report  -o mpi_strong_scaling_${SLURM_NTASKS}p_$SLURM_JOBID.txt  srun -n ${SLURM_NTASKS} ${PWD}/bin/heat_mpi -m 10
+perf-report  -o mpi_strong_scaling_${SLURM_NTASKS}p_$SLURM_JOBID.txt  srun -n ${SLURM_NTASKS} ${PWD}/bin/heat_mpi 
