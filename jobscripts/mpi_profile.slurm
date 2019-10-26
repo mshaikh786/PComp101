@@ -1,7 +1,7 @@
 #!/bin/bash -l
 
 #SBATCH --job-name=mpi_profile
-##SBATCH --reservation=training
+#SBATCH --reservation=training
 #SBATCH --time=00:20:00
 #SBATCH --nodes=1
 #SBATCH --partition=workq
@@ -10,5 +10,5 @@
 
 
 module load arm-reports
-srun --hint=nomultithread perf-report -n 8 $PWD/bin/heat_mpi
+perf-report srun --hint=nomultithread -n 4 $PWD/bin/heat_mpi
 

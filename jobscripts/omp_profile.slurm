@@ -1,7 +1,7 @@
 #!/bin/bash -l
 
 #SBATCH --job-name=omp_profile
-##SBATCH --reservation=training
+#SBATCH --reservation=training
 #SBATCH --time=00:20:00
 #SBATCH --nodes=1
 #SBATCH --partition=workq
