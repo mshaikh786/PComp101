@@ -2,7 +2,6 @@
 
 #SBATCH --job-name=strong_scaling
 #SBATCH --reservation=training
-#SBATCH -n 4
 #SBATCH --time=00:20:00
 #SBATCH --partition=workq
 #SBATCH --output=%x.%j.out
