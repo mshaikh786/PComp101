@@ -63,25 +63,46 @@ def plot(results):
     S=[T[0]/T[i] for i in range(len(T))]
     T_ideal=[T[0]/i for i in procs]
     S_ideal=[T_ideal[0]/T_ideal[i] for i in range(len(T_ideal))]
-    E=[S[i]/procs[i] for i in range(len(procs))]
+    E=[ 100.0*S[i]/procs[i] for i in range(len(procs))]
     
-    print(T)
-    print(S)
-    print(E)
-    print(procs)
+    x_axis=['2^%d'%math.log(p,2) for p in procs]
     
-    plt.figure(1)
-    plt.plot(procs,T,label='Compute time')
+    figure=plt.figure(1)
+    ax=figure.gca()
+    ax.plot(procs,T,'b-', label='real')
+    ax.plot(procs,T_ideal,'r--', label='ideal')
+    ax.legend(loc='upper left')
+    ax.set_xscale('log', basex=2)
+    plt.xticks(procs,x_axis)
+    plt.xlabel('MPI Processes (log2)')
+    plt.ylabel('Time(s)')
+    plt.title('Runtime')
     plt.savefig('Runtime.png')
     plt.close()
-    plt.figure(2)
-    plt.plot(procs,S,label='S_real')
-    plt.plot(procs,S_ideal,label='S_ideal')
+    
+    figure=plt.figure(2)
+    ax=figure.gca()
+    ax.plot(procs,S,'b-',label='real')
+    ax.plot(procs,S_ideal,'r--',label='ideal')
+    ax.legend(loc='upper left')
+    ax.set_xscale('log', basex=2)
+    plt.xticks(procs,x_axis)
+    plt.xlabel('MPI Processes (log2)')
+    plt.ylabel('Speedup')
+    plt.title('Speedup')
     plt.savefig('Speedup.png')
     plt.close()
     
-    plt.figure(3)
-    plt.plot(procs,E,label='E')
+    
+    figure=plt.figure(3)
+    ax=figure.gca()
+    ax.plot(procs,E)
+    ax.set_xscale('log', basex=2)
+    plt.xticks(procs,x_axis)
+    plt.xlabel('MPI Processes (log2)')
+    plt.ylabel('% Efficiency')
+    plt.title('Parallle Efficiency')
+    plt.ylim(0.0,100.0)
     plt.savefig('Efficiency.png')
     plt.close()    
 
