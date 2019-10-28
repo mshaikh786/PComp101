@@ -1,7 +1,7 @@
 #!/bin/bash -l
 
 #SBATCH --job-name=numa_info
-##SBATCH --reservation=training
+#SBATCH --reservation=training
 #SBATCH --time=00:10:00
 #SBATCH --nodes=1
 #SBATCH --partition=workq
