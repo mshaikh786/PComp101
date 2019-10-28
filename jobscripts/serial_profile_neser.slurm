@@ -6,7 +6,7 @@
 #SBATCH --partition=workq
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.out
-
+#SBATCH --hint=nomultithread
 module load openmpi
 
 srun -n 1 --hint=nomultithread $PWD/bin/heat_serial
